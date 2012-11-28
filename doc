@@ -23,7 +23,11 @@ And that’s all. Use mplayer’s FIFO.
 
 MPlayer allows you bind any key/button to any MPlayer command using a simple config file. The syntax consist of a key name followed by a command. The default config file location is $HOME/.mplayer/input.conf but it can be overridden using the -input conf option (relative path are relative to $HOME/.mplayer).
 
-You can get a full list of supported key names by running mplayer -input keylist and a full list of available commands by running mplayer -input cmdlist.
+Full list of supported key names by running:
+mplayer -input keylist
+ 
+Full list of available commands by running:
+mplayer -input cmdlist
 
 Example 3.1. A simple input control file
 
