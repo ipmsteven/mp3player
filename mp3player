@@ -1,15 +1,19 @@
 #!/bin/bash
 
-music="/home/steven/Music"
+music="/home/steven/Music/new"
 playlist="/home/steven/Music/playlist"
+title="/home/steven/.mplayer/.title_fifo"
+
 find $music  -type f -iregex ".*\.\(aac\|flac\|mp3\|ogg\|wav\)$" | sort > $playlist
 #find -maxdepth 1 -type f -iregex ".*\.\(aac\|flac\|mp3\|ogg\|wav\)$" | sort > playlist
 keyword=$1
+
 if [ -z "$keyword" ]
 then
-	mplayer -shuffle -really-quiet -playlist $playlist & 
-	exit
+	mplayer -shuffle -playlist $playlist -msglevel all=4 | while read a;do [[ $a =~ "Playing" ]] &&  echo $a>$title ;done  
+#	notify-send -t 1000 "Song" `cat $title`
+#	tail -f $title
 else
 	pl=`cat $playlist | grep -i $1`
-	mplayer -shuffle -really-quiet $pl 
+	mplayer -shuffle $pl -msglevel all=4 | while read a;do [ [$a =~ "Playing" ]] &&  echo $a>$title ;done  
 fi
